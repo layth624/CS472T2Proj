@@ -5,14 +5,69 @@
     <meta charset="UTF-8">
     <title>Register</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-size: 16px;
+            color: #000;
+            background-color: #f8f8f8;
+        }
+        * {
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
+
+        .form {
+            max-width: 320px;
+            padding: 15px;
+            margin: 150px auto;
+            background-color: #fff;
+        }
+
+        .input {
+            display: block;
+            width: 100%;
+            padding: 8px 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        label {
+            display: inline-block;
+            padding: 8px 10px;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 8px 10px;
+            border: 0;
+            background-color: #1e81b0;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .btn:hover {
+            background-color: #1e81b0;
+        }
+
+    </style>
 </head>
 <body>
-    <form action="register" method="post">
-        Full Name: <input type="text" name="fullName" /><br/>
-        Email: <input type="email" name="email" /><br/>
-        Username: <input type="text" name="username" /><br/>
-        Password: <input type="password" name="password" /><br/>
-        <input type="submit" value="Register" />
+    <form class="form" action="" method="post">
+        <input class="input" type="text" name="firstName" placeholder="First Name">
+        <input class="input" type="text" name="firstName" placeholder="Last Name">
+        <label for="dob">Date of Birth:</label>
+        <input class="input" type="date" id="dob" name="dob">
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label>
+        <input class="input" type="email" name="email" placeholder="Email">
+        <input class="input" type="text" name="username" placeholder="Username">
+        <input class="input" type="password" placeholder="Password">
+        <button class="btn" type="submit">Register</button>
     </form>
 </body>
 </html>
