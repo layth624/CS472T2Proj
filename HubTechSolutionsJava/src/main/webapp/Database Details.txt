@@ -4,4 +4,4 @@ Username: sql3694994
 Password: 2kWe65rRuQ
 Port number: 3306
 
-website to access: https://www.phpmyadmin.co/
+Website to access: https://www.phpmyadmin.co/
