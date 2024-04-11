@@ -3,7 +3,7 @@
     Created on : Apr 4, 2024, 10:53:46 PM
     Author     : layth
 --%>
-<%@ page import="java.sql.*" %>
+<%@ page import="DatabaseConnector"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

@@ -3,7 +3,7 @@
     Created on : Apr 4, 2024, 9:07:20 PM
     Author     : layth
 --%>
-
+<%@ page import="com.mycompany.mavenproject1.DatabaseConnector"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +43,16 @@
                     </div>
                 </div>
             </header>
-            
+            <h1>Admin Data</h1>
+            <%
+                DatabaseConnector dbConnector = new DatabaseConnector();
+                try {
+                    out.println(dbConnector.fetchAdminData());
+                } catch (Exception e) {
+                    out.println("Error: " + e.getMessage());
+                }
+            %>
+
             <!-- Quote Old section-->
             <!-- Blog preview section-->
             <section class="py-5" id="options">
