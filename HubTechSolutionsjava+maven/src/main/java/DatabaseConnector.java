@@ -15,7 +15,7 @@ try (Connection conn = DriverManager.getConnection(url, user, password)) {
             System.out.println("Connected to the database successfully");
             
             // Execute SQL query to select all rows from the 'admin' table
-            /*
+            
             String sql = "SELECT * FROM Admin";
             try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
                 
@@ -32,7 +32,7 @@ try (Connection conn = DriverManager.getConnection(url, user, password)) {
                 System.out.println("Error executing query");
                 e.printStackTrace();
             }
-            */
+            
             
         } catch (SQLException e) {
             System.out.println("Error connecting to the database");
