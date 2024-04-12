@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Modern Business - Start Bootstrap Template</title>
+        <title>HubTech Solutions</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/icon.png" />
         <!-- Bootstrap icons-->
@@ -68,10 +68,10 @@
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5">
                             <div class="card h-100 shadow border-0">
-                                <img class="card-img-top" src="assets/single.png" alt="..." />
+                                <a href = "single.jsp"><img class="card-img-top" src="assets/single.png" alt="..." /></a>
                                 <div class="card-body p-4">
                                     <div class="badge bg-primary bg-gradient rounded-pill mb-2">100 a day</div>
-                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">Single room</h5></a>
+                                    <a class="text-decoration-none link-dark stretched-link" href="single.jsp"><h5 class="card-title mb-3">Single room</h5></a>
                                     <p class="card-text mb-0">Welcome to our cozy haven, perfect for the solo traveler seeking comfort and convenience. Our single room is a snug retreat featuring a plush, queen-sized bed enveloped in luxurious linens. The room is equipped with modern amenities, including high-speed Wi-Fi, a flat-screen TV with international channels, and a minibar stocked with refreshments. The sleek, private bathroom offers a rainfall shower, fluffy towels, and complimentary toiletries to enhance your stay. Designed with the individual guest in mind, this room combines functionality with serenity, making it an ideal space to unwind after a day of exploration.</p>
                                 </div>
                             </div>

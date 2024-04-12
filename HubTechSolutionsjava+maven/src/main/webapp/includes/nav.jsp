@@ -19,6 +19,13 @@
                             <!-- <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li> -->
                             <li class="nav-item"><a class="nav-link" href="register.jsp">Register</a></li>
                             <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="profile.jsp">Profile</a></li>
+                            <% if(session != null && session.getAttribute("username") != null) { %>
+                                <!-- Logout Link -->
+                                <li class="nav-item"><a class="nav-link" href="logout.jsp">Logout</a></li>
+                            <% } else { %>
+                                <!-- Display something else if user not logged in -->
+                            <% } %>
                             <!-- <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li> -->
                             <!--
                             <li class="nav-item dropdown">

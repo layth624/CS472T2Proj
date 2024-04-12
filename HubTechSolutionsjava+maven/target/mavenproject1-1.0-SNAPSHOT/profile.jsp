@@ -1,0 +1,115 @@
+<%@page import="java.sql.*"%>
+<%@page import="com.mycompany.mavenproject1.DatabaseConnector"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>User Profile</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+</head>
+<body class="d-flex flex-column">
+    <main class="flex-shrink-0">
+        <%@ include file="includes/nav.jsp" %>
+        <section class="py-5">
+            <div class="container px-5">
+                <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
+                    <div class="text-center mb-5">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-person-circle"></i></div>
+                        <h1 class="fw-bolder">User Profile</h1>
+                    </div>
+                    <div class="row gx-5 justify-content-center">
+                        <div class="col-lg-8 col-xl-6">
+                            <% 
+                            String username = (String) session.getAttribute("username");
+                            if(username == null) {
+                                response.sendRedirect("login.jsp");
+                                return;
+                            }
+
+                            DatabaseConnector db = new DatabaseConnector();
+                            Connection con = null;
+                            PreparedStatement pstmt = null;
+                            ResultSet rs = null;
+
+                            try {
+                                con = db.connect();
+                                String query = "SELECT * FROM Users WHERE Username = ?";
+                                pstmt = con.prepareStatement(query);
+                                pstmt.setString(1, username);
+                                rs = pstmt.executeQuery();
+
+                                if (rs.next()) {
+                                    String userID = rs.getString("UserID");
+                                    String name = rs.getString("Name");
+                                    String email = rs.getString("Email");
+                                    String dob = rs.getString("Dob");
+                                    String address = rs.getString("Address");
+                                    String phone = rs.getString("PhoneNumber");
+                                    %>
+                                    <p><strong>Username:</strong> <%= username %></p>
+                                    <p><strong>Name:</strong> <%= name %></p>
+                                    <p><strong>Email:</strong> <%= email %></p>
+                                    <p><strong>Date of Birth:</strong> <%= dob %></p>
+                                    <p><strong>Address:</strong> <%= address %></p>
+                                    <p><strong>Phone:</strong> <%= phone %></p>
+                                    <%
+                                    // Query to get reservations for the user
+                                    query = "SELECT * FROM Reservation WHERE UserID = ?";
+                                    pstmt = con.prepareStatement(query);
+                                    pstmt.setString(1, userID);
+                                    ResultSet rsReservations = pstmt.executeQuery();
+                                    %>
+                                    <h2>Reservations</h2>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Reservation ID</th>
+                                                <th>Room ID</th>
+                                                <th>Check-In</th>
+                                                <th>Check-Out</th>
+                                                <th>Total Cost</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% while (rsReservations.next()) { %>
+                                                <tr>
+                                                    <td><%= rsReservations.getString("ReservationID") %></td>
+                                                    <td><%= rsReservations.getString("RoomID") %></td>
+                                                    <td><%= rsReservations.getString("CheckInDate") %></td>
+                                                    <td><%= rsReservations.getString("CheckOutDate") %></td>
+                                                    <td><%= rsReservations.getString("TotalCost") %></td>
+                                                    <td><%= rsReservations.getString("Status") %></td>
+                                                </tr>
+                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                    <% 
+                                    rsReservations.close();
+                                }
+                            } catch (Exception e) {
+                                out.println("Error: " + e.getMessage());
+                                e.printStackTrace();
+                            } finally {
+                                if (rs != null) try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+                                if (pstmt != null) try { pstmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+                                if (con != null) try { con.close(); } catch (SQLException e) { e.printStackTrace(); }
+                            }
+                            %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <%@ include file="includes/footer.jsp" %>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/scripts.js"></script>
+</body>
+</html>
