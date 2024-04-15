@@ -43,16 +43,6 @@
                     </div>
                 </div>
             </header>
-            <h1>Admin Data</h1>
-            <%
-                DatabaseConnector dbConnector = new DatabaseConnector();
-                try {
-                    out.println(dbConnector.fetchAdminData());
-                } catch (Exception e) {
-                    out.println("Error: " + e.getMessage());
-                }
-            %>
-
             <!-- Quote Old section-->
             <!-- Blog preview section-->
             <section class="py-5" id="options">
@@ -78,20 +68,20 @@
                         </div>
                         <div class="col-lg-4 mb-5">
                             <div class="card h-100 shadow border-0">
-                                <img class="card-img-top" src="assets/double.png" alt="..." />
+                                <a href = "double.jsp"><img class="card-img-top" src="assets/double.png" alt="..." /></a>
                                 <div class="card-body p-4">
                                     <div class="badge bg-primary bg-gradient rounded-pill mb-2">150 a day</div>
-                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">Double room</h5></a>
+                                    <a class="text-decoration-none link-dark stretched-link" href="double.jsp"><h5 class="card-title mb-3">Double room</h5></a>
                                     <p class="card-text mb-0">Embark on a memorable journey with a companion and immerse yourselves in the comfort of our double room. This room boasts two sumptuous twin beds or a king-sized bed, tailored to your preference and adorned with crisp, premium bedding. The space is thoughtfully designed with a harmonious blend of elegance and functionality, featuring a work desk, high-speed Wi-Fi, and a flat-screen TV. Refresh yourselves in the private bathroom equipped with a refreshing shower, soft towels, and exclusive toiletries. Whether you're here for business or leisure, our double room promises a relaxing and convenient stay for two.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4 mb-5">
                             <div class="card h-100 shadow border-0">
-                                <img class="card-img-top" src="assets/suite.png" alt="..." />
+                                <a href = "suite.jsp"><img class="card-img-top" src="assets/suite.png" alt="..." /></a>
                                 <div class="card-body p-4">
                                     <div class="badge bg-primary bg-gradient rounded-pill mb-2">250 a day</div>
-                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">Suite</h5></a>
+                                    <a class="text-decoration-none link-dark stretched-link" href="suite.jsp"><h5 class="card-title mb-3">Suite</h5></a>
                                     <p class="card-text mb-0">Step into the epitome of luxury in our spacious suite, where elegance meets unparalleled comfort. This exquisite suite features a separate living area and bedroom, furnished with a king-sized bed draped in the finest linens and a comfortable sofa set in the living room. The suite is outfitted with premium amenities, including two flat-screen TVs, a work desk, high-speed Wi-Fi, and a minibar. The lavish bathroom serves as a private spa, offering a large soaking tub, a separate rainfall shower, plush towels, and deluxe toiletries. Floor-to-ceiling windows provide breathtaking views, ensuring an unforgettable experience. Ideal for those desiring extra space and luxury, our suite offers the perfect sanctuary for relaxation and indulgence.</p>
                                 </div>
                             </div>

@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>User Profile</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 </head>
 <body class="d-flex flex-column">
     <main class="flex-shrink-0">
@@ -37,7 +37,7 @@
 
                             try {
                                 con = db.connect();
-                                String query = "SELECT * FROM Users WHERE Username = ?";
+                                String query = "SELECT UserID, Name, Email, Dob, Address, PhoneNumber FROM Users WHERE Username = ?";
                                 pstmt = con.prepareStatement(query);
                                 pstmt.setString(1, username);
                                 rs = pstmt.executeQuery();
@@ -57,8 +57,8 @@
                                     <p><strong>Address:</strong> <%= address %></p>
                                     <p><strong>Phone:</strong> <%= phone %></p>
                                     <%
-                                    // Query to get reservations for the user
-                                    query = "SELECT * FROM Reservation WHERE UserID = ?";
+                                    // Query to get reservation + room details
+                                    query = "SELECT r.ReservationID, r.RoomID, r.CheckInDate, r.CheckOutDate, r.TotalCost, r.Status, rm.RoomType, rm.RoomNumber, rm.Price FROM Reservation r JOIN Room rm ON r.RoomID = rm.RoomID WHERE r.UserID = ?";
                                     pstmt = con.prepareStatement(query);
                                     pstmt.setString(1, userID);
                                     ResultSet rsReservations = pstmt.executeQuery();
@@ -68,22 +68,32 @@
                                         <thead>
                                             <tr>
                                                 <th>Reservation ID</th>
-                                                <th>Room ID</th>
+                                                <th>Room Type</th>
+                                                <th>Room Number</th>
                                                 <th>Check-In</th>
                                                 <th>Check-Out</th>
                                                 <th>Total Cost</th>
                                                 <th>Status</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <% while (rsReservations.next()) { %>
                                                 <tr>
                                                     <td><%= rsReservations.getString("ReservationID") %></td>
-                                                    <td><%= rsReservations.getString("RoomID") %></td>
+                                                    <td><%= rsReservations.getString("RoomType") %></td>
+                                                    <td><%= rsReservations.getString("RoomNumber") %></td>
                                                     <td><%= rsReservations.getString("CheckInDate") %></td>
                                                     <td><%= rsReservations.getString("CheckOutDate") %></td>
-                                                    <td><%= rsReservations.getString("TotalCost") %></td>
+                                                    <td>$<%= rsReservations.getString("TotalCost") %></td>
                                                     <td><%= rsReservations.getString("Status") %></td>
+                                                    <td>
+                                                        <% if ("active".equals(rsReservations.getString("Status"))) { %>
+                                                            <a href="cart.jsp">Pay Now</a>
+                                                        <% } else if ("completed".equals(rsReservations.getString("Status"))) { %>
+                                                            <a href="cancel.jsp?reservationID=<%= rsReservations.getString("ReservationID") %>">Cancel Booking</a>
+                                                        <% } %>
+                                                    </td>
                                                 </tr>
                                             <% } %>
                                         </tbody>

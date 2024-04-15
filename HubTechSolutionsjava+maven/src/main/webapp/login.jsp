@@ -37,7 +37,7 @@
                                     </div>
                                 </form>
                                 <div class="text-center mt-4">
-                                     <!-- <a href="forgotPassword.jsp">Forgot Password?</a> <!-- Link to password recovery not sure if we need this--> -->
+                                     <!-- <a href="forgotPassword.jsp">Forgot Password?</a> <!-- Link to password recovery not sure if we need this-->
                                 </div>
                             </div>
                         </div>

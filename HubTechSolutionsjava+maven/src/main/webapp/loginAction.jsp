@@ -27,7 +27,7 @@ try {
     // After verifying user credentials
     if(loginSuccess) {
         session.setAttribute("username", username); 
-        response.sendRedirect("profile.jsp"); 
+        response.sendRedirect("index.jsp"); 
     } else {
         response.sendRedirect("login.jsp?error=true");
     }

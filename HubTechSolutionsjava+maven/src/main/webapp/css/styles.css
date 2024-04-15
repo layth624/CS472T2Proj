@@ -10847,14 +10847,20 @@ html {
   min-height: 15rem;
 }
 .room-box {
-width: 60px;
-height: 60px;
-line-height: 60px;
-color: white;
-text-align: center;
-font-weight: bold;
-margin: 5px;
-display: inline-block;
-}
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    margin: 5px;
+    display: inline-block;
+    }
 .available { background-color: green; }
 .booked { background-color: red; }
+.hallway {
+    width: 100%;
+    height: 20px;
+    background-color: #ccc;
+    margin: 20px 0;
+}

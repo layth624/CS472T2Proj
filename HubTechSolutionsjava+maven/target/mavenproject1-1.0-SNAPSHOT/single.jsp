@@ -6,18 +6,39 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Single Room Booking</title>
-    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <link href="css/styles.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <style>
+        .hallway {
+            width: 100%;
+            height: 20px;
+            background-color: #ccc;
+            margin: 20px 0;
+        }
+    </style>
     <script>
         function updatePrice() {
             var selectBox = document.getElementById('roomSelect');
-            var selectedValue = selectBox.value;
-            if (selectedValue !== '') {
-                document.getElementById('totalPrice').textContent = 'Total: $100';
+            var selectedRoomID = selectBox.value;
+            var selectedRoomNumber = selectBox.options[selectBox.selectedIndex].text.split(" ")[1];
+            document.getElementById('selectedRoomID').value = selectedRoomID;
+            document.getElementById('selectedRoomNumber').value = selectedRoomNumber;
+
+            var checkIn = new Date(document.getElementById('checkInDate').value);
+            var checkOut = new Date(document.getElementById('checkOutDate').value);
+            var diffTime = Math.abs(checkOut - checkIn);
+            var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+            if (!isNaN(diffDays)) {
+                var total = diffDays * 100;
+                document.getElementById('totalPrice').textContent = 'Total: $' + total;
             } else {
                 document.getElementById('totalPrice').textContent = '';
             }
+        }
+
+        function submitForm() {
+            document.getElementById('bookingForm').submit(); // Submit the form
         }
     </script>
 </head>
@@ -36,7 +57,6 @@
                     <div class="text-center mb-5">
                         <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-house-door"></i></div>
                         <h1 class="fw-bolder">Single Room Booking</h1>
-                        <img src="assets/single.png" alt="Single Room" style="width: 400px; height: 300px;">
                     </div>
                     <div>
                         <% 
@@ -46,30 +66,35 @@
                         ResultSet rs = null;
                         try {
                             con = db.connect();
-                            String query = "SELECT RoomNumber, Status FROM Room WHERE RoomType = 'single' AND RoomNumber BETWEEN 100 AND 115 ORDER BY RoomNumber";
+                            String query = "SELECT RoomID, RoomNumber, Status FROM Room WHERE RoomType = 'single' AND RoomNumber BETWEEN 100 AND 110 ORDER BY RoomNumber";
                             pstmt = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                             rs = pstmt.executeQuery();
                             %>
-                            <div>
-                                <% while (rs.next()) {
+                            <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+                                <% int count = 0;
+                                while (rs.next()) {
+                                    int roomID = rs.getInt("RoomID");
                                     int roomNumber = rs.getInt("RoomNumber");
                                     String status = rs.getString("Status");
                                     String cssClass = status.equals("available") ? "available" : "booked";
                                     %>
                                     <div class="room-box <%= cssClass %>"><%= roomNumber %></div>
-                                    <%
+                                    <% if (++count == 5) { %>
+                                        </div><div class="hallway"></div><div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+                                    <% }
                                 }
-                                rs.beforeFirst(); // Reset ResultSet 
+                                rs.beforeFirst();
                                 %>
                             </div>
                             <label for="roomSelect">Choose a room:</label>
-                            <select id="roomSelect" name="roomNumber" class="form-control mb-3" onchange="updatePrice()">
+                            <select id="roomSelect" class="form-control mb-3" onchange="updatePrice()">
                                 <option value="">Select a room</option>
                                 <% while (rs.next()) {
-                                    String status = rs.getString("Status");
+                                    int roomID = rs.getInt("RoomID");
                                     int roomNumber = rs.getInt("RoomNumber");
+                                    String status = rs.getString("Status");
                                     if (status.equals("available")) { %>
-                                        <option value="<%= roomNumber %>">Room <%= roomNumber %></option>
+                                        <option value="<%= roomID %>">Room <%= roomNumber %></option>
                                     <% }
                                 } %>
                             </select>
@@ -84,15 +109,17 @@
                         }
                         %>
                     </div>
-                    <form method="POST" action="bookRoom.jsp">
+                    <form id="bookingForm" method="POST" action="bookRoom.jsp" onsubmit="submitForm()">
                         <input type="hidden" name="roomType" value="single">
+                        <input type="hidden" id="selectedRoomID" name="roomID">
+                        <input type="hidden" id="selectedRoomNumber" name="roomNumber">
                         <div class="mb-3">
                             <label for="checkInDate" class="form-label">Check-In Date</label>
-                            <input type="date" class="form-control" id="checkInDate" name="checkInDate" required>
+                            <input type="date" class="form-control" id="checkInDate" name="checkInDate" required onchange="updatePrice()">
                         </div>
                         <div class="mb-3">
                             <label for="checkOutDate" class="form-label">Check-Out Date</label>
-                            <input type="date" class="form-control" id="checkOutDate" name="checkOutDate" required>
+                            <input type="date" class="form-control" id="checkOutDate" name="checkOutDate" required onchange="updatePrice()">
                         </div>
                         <div class="text-center mb-3">
                             <strong id="totalPrice"></strong>
