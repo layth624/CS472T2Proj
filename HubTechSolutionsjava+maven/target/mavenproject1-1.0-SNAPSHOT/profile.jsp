@@ -50,14 +50,32 @@
                                     String address = rs.getString("Address");
                                     String phone = rs.getString("PhoneNumber");
                                     %>
-                                    <p><strong>Username:</strong> <%= username %></p>
-                                    <p><strong>Name:</strong> <%= name %></p>
-                                    <p><strong>Email:</strong> <%= email %></p>
-                                    <p><strong>Date of Birth:</strong> <%= dob %></p>
-                                    <p><strong>Address:</strong> <%= address %></p>
-                                    <p><strong>Phone:</strong> <%= phone %></p>
+                                    <form method="POST" action="updateProfile.jsp" class="text-center"> 
+                                        <div class="form-floating mb-3">
+                                            <input class="form-control" id="name" name="name" type="text" placeholder="Name" value="<%= name %>" required />
+                                            <label for="name">Name</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input class="form-control" id="email" name="email" type="email" placeholder="Email" value="<%= email %>" required />
+                                            <label for="email">Email</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input class="form-control" id="dob" name="dob" type="date" placeholder="Date of Birth" value="<%= dob %>" required />
+                                            <label for="dob">Date of Birth</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input class="form-control" id="address" name="address" type="text" placeholder="Address" value="<%= address %>" required />
+                                            <label for="address">Address</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input class="form-control" id="phone" name="phone" type="text" placeholder="Phone Number" value="<%= phone %>" required />
+                                            <label for="phone">Phone Number</label>
+                                        </div>
+                                        <div class="d-grid">
+                                            <button class="btn btn-primary btn-lg" type="submit">Update Profile</button>
+                                        </div>
+                                    </form>
                                     <%
-                                    // Query to get reservation + room details
                                     query = "SELECT r.ReservationID, r.RoomID, r.CheckInDate, r.CheckOutDate, r.TotalCost, r.Status, rm.RoomType, rm.RoomNumber, rm.Price FROM Reservation r JOIN Room rm ON r.RoomID = rm.RoomID WHERE r.UserID = ?";
                                     pstmt = con.prepareStatement(query);
                                     pstmt.setString(1, userID);
@@ -85,7 +103,7 @@
                                                     <td><%= rsReservations.getString("RoomNumber") %></td>
                                                     <td><%= rsReservations.getString("CheckInDate") %></td>
                                                     <td><%= rsReservations.getString("CheckOutDate") %></td>
-                                                    <td>$<%= rsReservations.getString("TotalCost") %></td>
+                                                    <td>$<%= rsReservations.getDouble("TotalCost") %></td>
                                                     <td><%= rsReservations.getString("Status") %></td>
                                                     <td>
                                                         <% if ("active".equals(rsReservations.getString("Status"))) { %>
