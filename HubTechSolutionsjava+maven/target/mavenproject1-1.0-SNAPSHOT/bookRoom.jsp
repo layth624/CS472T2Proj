@@ -100,6 +100,8 @@
                             %>
                             <h1>Booking Successful!</h1>
                             <p>Your booking for room number <%= roomNumber %> has been confirmed for dates <%= sdf.format(checkIn) %> to <%= sdf.format(checkOut) %>. Total cost: $<%= totalCost %>. The booking status is now 'active'.</p>
+                            <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+<div class="elfsight-app-ec546c74-c0d7-471f-a0ee-5c118540fccf" data-elfsight-app-lazy></div>
                             <a href="profile.jsp" class="btn btn-primary">Go to My Profile</a>
                             <% 
                         } else {
