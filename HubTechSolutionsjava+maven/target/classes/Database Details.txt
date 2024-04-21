@@ -1,0 +1,7 @@
+Server: sql3.freemysqlhosting.net
+Name: sql3694994
+Username: sql3694994
+Password: 2kWe65rRuQ
+Port number: 3306
+
+Website to access: https://www.phpmyadmin.co/
