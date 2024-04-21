@@ -43,6 +43,12 @@
     </script>
 </head>
 <body class="d-flex flex-column">
+    <% 
+    if (session.getAttribute("username") == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+    %>
     <main class="flex-shrink-0">
         <%@ include file="includes/nav.jsp" %>
         <section class="py-5">
