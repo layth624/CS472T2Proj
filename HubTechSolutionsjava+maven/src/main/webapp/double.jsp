@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Single Room Booking</title>
+    <title>Double Room Booking</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <link href="css/styles.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
@@ -60,7 +60,7 @@
                         ResultSet rs = null;
                         try {
                             con = db.connect();
-                            String query = "SELECT RoomID, RoomNumber, Status FROM Room WHERE RoomType = 'single' AND RoomNumber BETWEEN 100 AND 110 ORDER BY RoomNumber";
+                            String query = "SELECT RoomID, RoomNumber, Status FROM Room WHERE RoomType = 'double' AND RoomNumber BETWEEN 200 AND 210 ORDER BY RoomNumber";
                             pstmt = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                             rs = pstmt.executeQuery();
                             %>
