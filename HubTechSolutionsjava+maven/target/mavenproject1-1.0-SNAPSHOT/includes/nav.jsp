@@ -39,7 +39,6 @@
                     <!-- toggle register + login option -->
                     <li class="nav-item"><a class="nav-link" href="register.jsp">Register</a></li>
                     <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="adminLogin.jsp"> Admin Login</a></li>
                 <% } %>
             </ul>
         </div>
