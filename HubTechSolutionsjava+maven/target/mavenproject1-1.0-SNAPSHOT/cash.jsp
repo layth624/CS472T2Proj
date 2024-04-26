@@ -21,6 +21,11 @@
                         <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-cash"></i></div>
                         <h1 class="fw-bolder">Confirm Payment</h1>
                         <% 
+                        String username = (String) session.getAttribute("username");
+                        if(username == null) {
+                            response.sendRedirect("login.jsp");
+                            return;
+                        }
                         String reservationID = request.getParameter("reservationID");
                         double amount = 0; 
                         DatabaseConnector db = new DatabaseConnector();
