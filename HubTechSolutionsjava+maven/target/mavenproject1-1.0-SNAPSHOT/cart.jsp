@@ -71,7 +71,6 @@
                                                 <option value="">Choose...</option>
                                                 <option value="Credit Card">Credit Card</option>
                                                 <option value="PayPal">PayPal</option>
-                                                <option value="Bank Transfer">Bank Transfer</option>
                                                 <option value="Cash">Cash</option>
                                             </select>
                                         </td>
@@ -98,22 +97,29 @@
     <%@ include file="includes/footer.jsp" %>
     <script src="js/scripts.js"></script>
     <script>
-        function handlePaymentMethod(reservationID) {
-            var paymentMethod = document.getElementById('paymentMethod' + reservationID).value;
-            if (paymentMethod === 'Cash') {
-                console.log('Please prepare to pay at the front desk upon your arrival.');
-            }
-        }
-
         function submitPayment(reservationID) {
             var paymentMethod = document.getElementById('paymentMethod' + reservationID).value;
             if (!paymentMethod) {
                 alert('Please select a payment method.');
                 return;
             }
-            // Implement redirection later
-            console.log('Proceeding to payment gateway...');
+
+            switch(paymentMethod) {
+                case 'Credit Card':
+                    window.location.href = 'credit.jsp?reservationID=' + reservationID;
+                    break;
+                case 'PayPal':
+                    window.location.href = 'paypal.jsp?reservationID=' + reservationID;
+                    break;
+                case 'Cash':
+                    window.location.href = 'cash.jsp?reservationID=' + reservationID;
+                    break;
+                default:
+                    alert('Invalid payment method selected.');
+                    break;
+            }
         }
     </script>
+
 </body>
 </html>

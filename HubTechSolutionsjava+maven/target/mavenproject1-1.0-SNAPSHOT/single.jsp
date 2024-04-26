@@ -66,7 +66,7 @@
                         ResultSet rs = null;
                         try {
                             con = db.connect();
-                            String query = "SELECT RoomID, RoomNumber, Status FROM Room WHERE RoomType = 'single' AND RoomNumber BETWEEN 100 AND 110 ORDER BY RoomNumber";
+                            String query = "SELECT RoomID, RoomNumber, Status FROM Room WHERE RoomType = 'single' AND RoomNumber BETWEEN 100 AND 150 ORDER BY RoomNumber";
                             pstmt = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                             rs = pstmt.executeQuery();
                             %>

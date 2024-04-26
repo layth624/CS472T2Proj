@@ -25,8 +25,8 @@
                             <div class="col-lg-8 col-xl-6">
                                 <form id="loginForm" method="post" action="loginAction.jsp"> 
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="username" name="username" type="text" placeholder="Enter your username or email..." required />
-                                        <label for="username">Username or Email</label>
+                                        <input class="form-control" id="username" name="username" type="text" placeholder="Enter your username" required />
+                                        <label for="username">Username</label>
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="password" name="password" type="password" placeholder="Enter your Password" required />

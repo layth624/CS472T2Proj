@@ -30,7 +30,7 @@
             var diffTime = Math.abs(checkOut - checkIn);
             var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
             if (!isNaN(diffDays)) {
-                var total = diffDays * 100;
+                var total = diffDays * 150;
                 document.getElementById('totalPrice').textContent = 'Total: $' + total;
             } else {
                 document.getElementById('totalPrice').textContent = '';
@@ -66,7 +66,7 @@
                         ResultSet rs = null;
                         try {
                             con = db.connect();
-                            String query = "SELECT RoomID, RoomNumber, Status FROM Room WHERE RoomType = 'double' AND RoomNumber BETWEEN 200 AND 210 ORDER BY RoomNumber";
+                            String query = "SELECT RoomID, RoomNumber, Status FROM Room WHERE RoomType = 'double' AND RoomNumber BETWEEN 200 AND 250 ORDER BY RoomNumber";
                             pstmt = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                             rs = pstmt.executeQuery();
                             %>
