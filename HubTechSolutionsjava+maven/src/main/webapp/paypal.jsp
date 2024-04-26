@@ -6,7 +6,9 @@
     <title>PayPal Payment</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <link href="css/styles.css" rel="stylesheet" />
-    <!--  PayPal JavaScript SDK -->
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- PayPal JavaScript SDK -->
     <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID"></script>
 </head>
 <body>
@@ -14,36 +16,50 @@
         <h1 class="mt-5">PayPal Payment Integration</h1>
         <p>Please click the PayPal button below to proceed with your payment.</p>
 
-        <!-- PayPal button  -->
+        <!-- PayPal button container -->
         <div id="paypal-button-container"></div>
 
+        <!-- Back button -->
+        <a href="profile.jsp" class="btn btn-secondary mt-3">Back to Profile</a>
+
+        <!-- PayPal JavaScript -->
         <script>
-            paypal.Buttons({
-                createOrder: function(data, actions) {
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: {
-                                value: '50.00' // adjust dynamically
+            // Function to get the total cost
+            function getTotalCost() {
+                // Retrieve reservationID
+                const urlParams = new URLSearchParams(window.location.search);
+                const reservationID = urlParams.get('reservationID');
+                // Replace 'YOUR_API_ENDPOINT' with the actual
+                fetch('YOUR_API_ENDPOINT?reservationID=' + reservationID)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Set the total cost dynamically
+                        paypal.Buttons({
+                            createOrder: function(data, actions) {
+                                return actions.order.create({
+                                    purchase_units: [{
+                                        amount: {
+                                            value: data.totalCost
+                                        }
+                                    }]
+                                });
+                            },
+                            onApprove: function(data, actions) {
+                                return actions.order.capture().then(function(details) {
+                                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                                    // Redirect the user to a confirmation page
+                                    window.location.href = "confirmation.jsp";
+                                });
                             }
-                        }]
-                    });
-                },
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
-                        alert('Transaction completed by ' + details.payer.name.given_name + '!');
-                        // redirect the user to a confirmation page
-                        window.location.href = "confirmation.jsp";
-                    });
-                }
-            }).render('#paypal-button-container');
+                        }).render('#paypal-button-container');
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+            getTotalCost();
         </script>
     </main>
 
-    <footer class="footer mt-auto py-3">
-        <div class="container">
-            <span class="text-muted">Place sticky footer content here.</span>
-        </div>
-    </footer>
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
