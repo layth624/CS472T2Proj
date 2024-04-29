@@ -23,7 +23,7 @@
                         </div>
                         <div class="row gx-5 justify-content-center">
                             <div class="col-lg-8 col-xl-6">
-                                <form id="loginForm" method="post" action="loginAction.jsp"> 
+                                <form id="loginForm" method="post" action="adminLoginAction.jsp"> 
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="username" name="username" type="text" placeholder="Enter your username or email..." required />
                                         <label for="username">Admin Username or Email</label>
@@ -34,6 +34,9 @@
                                     </div>
                                     <div class="d-grid">
                                         <button class="btn btn-primary btn-lg" type="submit">Log In</button>
+                                    </div>
+                                    <div class="text-center mt-4">
+                                        <button class="btn btn-link" onclick="window.location.href='adminRegistration.jsp'">Create an Account</button>
                                     </div>
                                 </form>
                                 <div class="text-center mt-4">
