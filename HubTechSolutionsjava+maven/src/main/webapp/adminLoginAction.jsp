@@ -3,8 +3,8 @@
 <%@ page import="org.mindrot.jbcrypt.BCrypt"%>
 
 <%
-String adminUsername = request.getParameter("adminUsername");
-String adminPassword = request.getParameter("adminPassword");
+String adminUsername = request.getParameter("username");
+String adminPassword = request.getParameter("password");
 boolean loginSuccess = false;
 
 DatabaseConnector db = new DatabaseConnector();
@@ -27,7 +27,7 @@ try {
     // After verifying admin credentials
     if(loginSuccess) {
         session.setAttribute("adminUsername", adminUsername); 
-        response.sendRedirect("index.jsp"); // change to admin dashboard
+        response.sendRedirect("adminDashboard.jsp"); // change to admin dashboard
     } else {
         response.sendRedirect("adminLogin.jsp?error=true");
     }
