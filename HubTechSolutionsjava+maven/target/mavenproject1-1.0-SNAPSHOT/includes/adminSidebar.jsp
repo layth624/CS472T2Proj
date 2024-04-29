@@ -7,15 +7,21 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="manageUsers.jsp">
+                <a class="nav-link" href="adminManageUsers.jsp">
                     Manage Users
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="systemLogs.jsp">
-                    System Logs
+                    Manage Reservations
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="systemLogs.jsp">
+                    Manage Rooms
+                </a>
+            </li>
+
         </ul>
     </div>
 </nav>
