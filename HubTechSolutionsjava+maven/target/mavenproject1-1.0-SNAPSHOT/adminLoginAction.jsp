@@ -27,7 +27,7 @@ try {
     // After verifying admin credentials
     if(loginSuccess) {
         session.setAttribute("adminUsername", adminUsername); 
-        response.sendRedirect("adminDashboard.jsp"); // change to admin dashboard
+        response.sendRedirect("adminDashboard.jsp");
     } else {
         response.sendRedirect("adminLogin.jsp?error=true");
     }

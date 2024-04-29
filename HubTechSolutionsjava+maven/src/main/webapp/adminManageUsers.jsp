@@ -32,13 +32,20 @@
     conn.close();
 %>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Users</title>
-    <!-- Add your CSS stylesheets here -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet"> <!-- Custom styles for this template -->
 </head>
 <body>
+    <header>
+        <%@ include file="includes/adminNav.jsp" %> <!-- Navigation bar specific to admin -->
+    </header>
     <h1>Manage Users</h1>
     <h2>Add User</h2>
     <form method="post" action="adminAddUser.jsp">
@@ -70,7 +77,6 @@
                 <th>Phone Number</th>
                 <th>Date of Birth</th>
                 <th>Username</th>
-                <!-- You can add more columns as needed -->
                 <th>Action</th>
             </tr>
         </thead>
@@ -84,7 +90,6 @@
                     <td><%= user.get("PhoneNumber") %></td>
                     <td><%= user.get("Dob") %></td>
                     <td><%= user.get("Username") %></td>
-                    <!-- Add more columns as needed -->
                     <td>
                         <form method="post" action="adminRemoveUser.jsp">
                             <input type="hidden" name="userID" value="<%= user.get("UserID") %>">
