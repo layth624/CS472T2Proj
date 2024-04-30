@@ -61,33 +61,39 @@
                     </form>
                     <% 
                     if ("YES".equals(request.getParameter("confirm"))) {
-                        con = null;
-                        pstmt = null;
                         try {
-                            con = db.connect();
+                            con = db.connect(); // Ensure a fresh connection is established if needed
                             con.setAutoCommit(false);
                             String sqlUpdatePayment = "INSERT INTO Payment (ReservationID, Amount, Date, PaymentMethod, Status) VALUES (?, ?, CURRENT_TIMESTAMP, 'cash', 'completed')";
-                            pstmt = con.prepareStatement(sqlUpdatePayment);
+                            pstmt = con.prepareStatement(sqlUpdatePayment, Statement.RETURN_GENERATED_KEYS);
                             pstmt.setString(1, reservationID);
-                            pstmt.setDouble(2, amount); 
+                            pstmt.setDouble(2, amount);
                             int res = pstmt.executeUpdate();
                             if (res > 0) {
+                                ResultSet generatedKeys = pstmt.getGeneratedKeys();
+                                long paymentID = 0;
+                                if (generatedKeys.next()) {
+                                    paymentID = generatedKeys.getLong(1); // Retrieve generated PaymentID
+                                }
+                                generatedKeys.close();
+                                pstmt.close();
                                 String sqlUpdateReservation = "UPDATE Reservation SET Status = 'completed' WHERE ReservationID = ?";
                                 pstmt = con.prepareStatement(sqlUpdateReservation);
                                 pstmt.setString(1, reservationID);
                                 pstmt.executeUpdate();
                                 con.commit();
+                                response.sendRedirect("sendEmail.jsp?paymentID=" + paymentID); // Redirect with PaymentID
                             } else {
                                 con.rollback();
                             }
                         } catch (SQLException e) {
                             out.println("<p>Error: " + e.getMessage() + "</p>");
                             e.printStackTrace();
+                            if (con != null) try { con.rollback(); } catch (SQLException ex) {}
                         } finally {
                             if (pstmt != null) try { pstmt.close(); } catch (SQLException ex) {}
                             if (con != null) try { con.close(); } catch (SQLException ex) {}
                         }
-                        response.sendRedirect("profile.jsp");
                     }
                     %>
                 </div>
