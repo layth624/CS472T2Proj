@@ -2,14 +2,27 @@
 <%@ page import="com.mycompany.mavenproject1.DatabaseConnector" %>
 
 <%
-    // Retrieve room ID from the form
     String roomID = request.getParameter("roomID");
 
     // Establish database connection
     DatabaseConnector db = new DatabaseConnector();
     Connection conn = db.connect();
 
-    // Delete the room from the database
+    // Check for associated reservations
+    String queryCheck = "SELECT COUNT(*) AS count FROM RoomReservation WHERE RoomID = ?";
+    try (PreparedStatement pstmtCheck = conn.prepareStatement(queryCheck)) {
+        pstmtCheck.setString(1, roomID);
+        ResultSet rs = pstmtCheck.executeQuery();
+        if (rs.next() && rs.getInt("count") > 0) {
+            response.sendRedirect("adminManageRooms.jsp?msg=Cannot delete room with existing reservations");
+            return;
+        }
+    } catch (SQLException e) {
+        response.sendRedirect("adminManageRooms.jsp?msg=Database error: " + e.getMessage());
+        return;
+    }
+
+    // Delete the room
     String query = "DELETE FROM Room WHERE RoomID = ?";
     try (PreparedStatement pstmt = conn.prepareStatement(query)) {
         pstmt.setString(1, roomID);
@@ -17,7 +30,7 @@
         if (result > 0) {
             response.sendRedirect("adminManageRooms.jsp?msg=Room deleted successfully");
         } else {
-            response.sendRedirect("adminManageRooms.jsp?msg=No room found with the provided ID or deletion failed");
+            response.sendRedirect("adminManageRooms.jsp?msg=No room found with the provided ID");
         }
     } catch (SQLException e) {
         e.printStackTrace();

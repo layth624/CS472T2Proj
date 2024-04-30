@@ -112,6 +112,10 @@
                     <td><%= room.get("FloorLocation") %></td>
                     <td><%= room.get("RoomNumber") %></td>
                     <td>
+                        <form method="post" action="adminUpdateRoom.jsp">
+                            <input type="hidden" name="roomID" value="<%= room.get("RoomID") %>">
+                            <input type="submit" value="Update">
+                        </form>
                         <form method="post" action="adminRemoveRoom.jsp">
                             <input type="hidden" name="roomID" value="<%= room.get("RoomID") %>">
                             <input type="submit" value="Remove">
