@@ -48,7 +48,7 @@
                 message.setFrom(new InternetAddress("hubtechsolutions6@gmail.com"));
                 message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userEmail));
                 message.setSubject("Payment Confirmation");
-                message.setText("Dear " + username + ",\n\nYour payment has been processed successfully. Payment ID: " + paymentID);
+                message.setText("Dear " + username + ",\n\nYour payment has been processed successfully. Payment ID: " + paymentID + ",\n\n. Thank you for choosing Hubtech Solutions");
 
                 // Send the email
                 Transport.send(message);
