@@ -64,6 +64,6 @@
     }
     %>
     <br>
-    <button onclick="window.location.href='profile.jsp'">Return to Profile</button>
+    <a href="profile.jsp" class="btn btn-secondary mt-3">Back to Profile</a>
 </body>
 </html>

@@ -20,7 +20,7 @@
         <div id="stripe-button-container"></div>
 
         <!-- Back button -->
-        <a href="profile.jsp" class="btn btn-secondary mt-3">Back to Profile</a>
+        <a href="cart.jsp" class="btn btn-secondary mt-3">Back to Profile</a>
 
         <!-- Stripe JavaScript -->
         <script>
