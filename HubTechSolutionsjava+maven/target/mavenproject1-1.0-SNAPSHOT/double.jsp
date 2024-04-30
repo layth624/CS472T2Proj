@@ -31,12 +31,12 @@
             var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
             // Existing code to calculate the total...
             if (!isNaN(diffDays)) {
-                var total = diffDays * 150;  // Ensure this matches the current rate
+                var total = diffDays * 150;  
                 document.getElementById('totalPrice').textContent = 'Total: $' + total;
-                document.getElementById('totalPriceInput').value = total;  // Update the hidden input
+                document.getElementById('totalPriceInput').value = total;  
             } else {
                 document.getElementById('totalPrice').textContent = '';
-                document.getElementById('totalPriceInput').value = '';  // Reset the hidden input
+                document.getElementById('totalPriceInput').value = '';  
             }
         }
 

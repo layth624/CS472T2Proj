@@ -1,5 +1,4 @@
 <%@ page import="com.mycompany.mavenproject1.DatabaseConnector"%> 
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +22,7 @@
                         </div>
                         <div class="row gx-5 justify-content-center">
                             <div class="col-lg-8 col-xl-6">
+                            <!-- Credit to web3forms.com for contact page-->
                             <form action="https://api.web3forms.com/submit" method="POST" id="form">
                               <input type="hidden" name="access_key" value="ca77cff2-9d5d-47ce-b5d7-f2cc0a1d48e3" />
                               <input
