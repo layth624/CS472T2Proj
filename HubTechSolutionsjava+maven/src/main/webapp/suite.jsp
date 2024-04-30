@@ -29,11 +29,13 @@
             var checkOut = new Date(document.getElementById('checkOutDate').value);
             var diffTime = Math.abs(checkOut - checkIn);
             var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-            if (!isNaN(diffDays)) {
-                var total = diffDays * 100;
+             if (!isNaN(diffDays)) {
+                var total = diffDays * 250;  // Ensure this matches the current rate
                 document.getElementById('totalPrice').textContent = 'Total: $' + total;
+                document.getElementById('totalPriceInput').value = total;  // Update the hidden input
             } else {
                 document.getElementById('totalPrice').textContent = '';
+                document.getElementById('totalPriceInput').value = '';  // Reset the hidden input
             }
         }
 
@@ -66,7 +68,7 @@
                         ResultSet rs = null;
                         try {
                             con = db.connect();
-                            String query = "SELECT RoomID, RoomNumber, Status FROM Room WHERE RoomType = 'suite' AND RoomNumber BETWEEN 300 AND 310 ORDER BY RoomNumber";
+                            String query = "SELECT RoomID, RoomNumber, Status FROM Room WHERE RoomType = 'suite' AND RoomNumber BETWEEN 300 AND 350 ORDER BY RoomNumber";
                             pstmt = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                             rs = pstmt.executeQuery();
                             %>
@@ -113,6 +115,7 @@
                         <input type="hidden" name="roomType" value="suite">
                         <input type="hidden" id="selectedRoomID" name="roomID">
                         <input type="hidden" id="selectedRoomNumber" name="roomNumber">
+                        <input type="hidden" id="totalPriceInput" name="totalCost" value="">
                         <div class="mb-3">
                             <label for="checkInDate" class="form-label">Check-In Date</label>
                             <input type="date" class="form-control" id="checkInDate" name="checkInDate" required onchange="updatePrice()">

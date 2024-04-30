@@ -29,7 +29,7 @@
                         String roomNumber = request.getParameter("roomNumber");
                         String checkInDate = request.getParameter("checkInDate");
                         String checkOutDate = request.getParameter("checkOutDate");
-                        double totalCost = 0;
+                        double totalCost = Double.parseDouble(request.getParameter("totalCost")); // Get totalCost from the previous page
                         boolean bookingSuccess = false;
                         Connection con = null;
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -42,9 +42,6 @@
                             if (!checkIn.before(checkOut)) {
                                 throw new IllegalArgumentException("Check-out date must be after check-in date.");
                             }
-
-                            long days = (checkOut.getTime() - checkIn.getTime()) / (24 * 60 * 60 * 1000);
-                            totalCost = days * 100;
 
                             DatabaseConnector db = new DatabaseConnector();
                             con = db.connect();
