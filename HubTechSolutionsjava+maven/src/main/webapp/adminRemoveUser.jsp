@@ -22,5 +22,5 @@
     conn.close();
 
     // Redirect back to manageUsers.jsp after removing the user
-    response.sendRedirect("manageUsers.jsp");
+    response.sendRedirect("adminManageUsers.jsp");
 %>

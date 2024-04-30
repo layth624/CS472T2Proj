@@ -80,13 +80,13 @@
                                     String status = rs.getString("Status");
                                     String cssClass = status.equals("available") ? "available" : "booked";
                                     %>
-                                    <div class="room-box <%= cssClass %>"><%= roomNumber %></div>
-                                    <% if (++count == 5) { %>
-                                        </div><div class="hallway"></div><div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+                                    <div class="room-box <%= cssClass %>" style="flex: 0 0 18%; margin: 5px;"><%= roomNumber %></div>
+                                    <% count++;
+                                    if (count % 5 == 0 && rs.isLast() == false) { %>
+                                        <div style="width: 100%; height: 20px; background-color: #ccc; margin: 20px 0;"></div> <!-- Hallway after every 5 boxes -->
                                     <% }
                                 }
-                                rs.beforeFirst();
-                                %>
+                                rs.beforeFirst(); %>
                             </div>
                             <label for="roomSelect">Choose a room:</label>
                             <select id="roomSelect" class="form-control mb-3" onchange="updatePrice()">

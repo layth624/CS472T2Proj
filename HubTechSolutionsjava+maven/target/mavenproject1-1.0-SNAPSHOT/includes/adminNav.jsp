@@ -17,12 +17,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="systemLogs.jsp">
+                    <a class="nav-link" href="adminManageReservations.jsp">
                         Manage Reservations
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="systemLogs.jsp">
+                    <a class="nav-link" href="adminManageRooms.jsp">
                         Manage Rooms
                     </a>
                 </li>
@@ -33,7 +33,6 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="logout.jsp">Logout</a></li>
-                            <li><a class="dropdown-item" href="index.jsp">User View</a></li>
                             <li><a class="dropdown-item" href="adminDashboard.jsp">Admin View</a></li>                        </ul>
                         </ul>
                     </li>

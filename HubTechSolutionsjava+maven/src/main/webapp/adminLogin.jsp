@@ -36,7 +36,7 @@
                                         <button class="btn btn-primary btn-lg" type="submit">Log In</button>
                                     </div>
                                     <div class="text-center mt-4">
-                                        <button class="btn btn-link" onclick="window.location.href='adminRegistration.jsp'">Create an Account</button>
+                                        <a href="adminAccess.jsp" class="btn btn-link">Create an Account</a>
                                     </div>
                                 </form>
                                 <div class="text-center mt-4">

@@ -9,6 +9,12 @@
     <link href="css/styles.css" rel="stylesheet"> <!-- Custom styles for this template -->
 </head>
 <body>
+    <% 
+    if (session.getAttribute("adminUsername") == null) {
+        response.sendRedirect("adminLogin.jsp");
+        return;
+    }
+    %>
     <header>
         <%@ include file="includes/adminNav.jsp" %> <!-- Navigation bar specific to admin -->
     </header>

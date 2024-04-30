@@ -1,6 +1,18 @@
 <%@ page import="com.mycompany.mavenproject1.DatabaseConnector"%> 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% 
+// admin password
+final String ADMIN_PASSWORD = "1234";
+
+// Check if password is correct
+String adminAccessKey = request.getParameter("adminAccessKey");
+if (adminAccessKey == null || !ADMIN_PASSWORD.equals(adminAccessKey)) {
+    response.sendRedirect("adminAccess.jsp"); // Redirect to the password form page
+    return;
+}
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -1,8 +1,12 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.mycompany.mavenproject1.DatabaseConnector" %>
+    <% 
+    if (session.getAttribute("adminUsername") == null) {
+        response.sendRedirect("adminLogin.jsp");
+        return;
+    }
 
-<%
     // Establish a database connection
     DatabaseConnector db = new DatabaseConnector();
     Connection conn = db.connect();
@@ -41,6 +45,20 @@
     <title>Manage Users</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet"> <!-- Custom styles for this template -->
+    
+    <style>
+        table {
+            width: 100%; 
+            border-collapse: collapse; 
+        }
+        th, td {
+            padding: 8px; 
+            border: 1px solid #ccc; 
+        }
+        th {
+            background-color: #f4f4f4; 
+        }
+    </style>
 </head>
 <body>
     <header>
