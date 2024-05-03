@@ -26,9 +26,9 @@
                 </div>
                 <form name="menu">
                     <select name="sel" >
-                        <option title="User">User's Table</option>
-                        <option title="Reservation">Reservation Table</option>
-                        <option title="Rooms">Rooms' Table</option>
+                    <option title="User" value="adminManageUsers.jsp">User's Table</option>
+                    <option title="Reservation" value="adminManageReservations.jsp">Reservation Table</option>
+                    <option title="Rooms" value="adminManageRooms.jsp">Rooms' Table</option>
                     </select>
                 </form>
                 <div class="btn-toolbar mb-2 mb-md-0">
@@ -42,7 +42,78 @@
             </main>
         </div>
     </div>
+     <script type="text/javascript">
+         document.addEventListener('DOMContentLoaded', function () {
+            const exportButton = document.querySelector('.btn-export');
+            exportButton.addEventListener('click', function () {
+            tableToCSV();
+            });
+        });
+        function tableToCSV() {
+ 
+            // Variable to store the final csv data
+            let csv_data = [];
+ 
+            // Get each row data
+            let rows = document.getElementsByTagName('tr');
+            for (let i = 0; i < rows.length; i++) {
+ 
+                // Get each column data
+                let cols = rows[i].querySelectorAll('td,th');
+ 
+                // Stores each csv row data
+                let csvrow = [];
+                for (let j = 0; j < cols.length -1; j++) {
+ 
+                    // Get the text data of each cell
+                    let cellValue = cols[j].innerHTML;
 
+                    // Check if the cell value contains a comma
+                    if (cellValue.includes(',')) {
+                        // Surround the cell value with double quotes
+                        cellValue = '"' + cellValue + '"';
+                    }
+
+                    // Push the cell value to csvrow
+                    csvrow.push(cellValue);
+                }
+ 
+                // Combine each column value with comma
+                csv_data.push(csvrow.join(","));
+            }
+ 
+            // Combine each row data with new line character
+            csv_data = csv_data.join('\n');
+ 
+            // Call this function to download csv file  
+            downloadCSVFile(csv_data);
+ 
+        }
+ 
+        function downloadCSVFile(csv_data) {
+ 
+            // Create CSV file object and feed csv_data into it
+            CSVFile = new Blob([csv_data], {
+                type: "text/csv"
+            });
+ 
+            // Create to temporary link to initiate download process
+            let temp_link = document.createElement('a');
+ 
+            // Download csv file
+            temp_link.download = "GfG.csv";
+            let url = window.URL.createObjectURL(CSVFile);
+            temp_link.href = url;
+ 
+            // This link should not be displayed
+            temp_link.style.display = "none";
+            document.body.appendChild(temp_link);
+ 
+            // Automatically click the link to trigger download
+            temp_link.click();
+            document.body.removeChild(temp_link);
+        }
+    </script>          
     <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
