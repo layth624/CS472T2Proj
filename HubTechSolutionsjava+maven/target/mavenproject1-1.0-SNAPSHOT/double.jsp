@@ -16,7 +16,7 @@
             var numDays = getNumberOfDays();
 
             selectedRooms.forEach(function(option) {
-                total += 150;  // Assuming each room costs $100 per day
+                total += 150;  // Assuming each room costs $150 per day
             });
 
             total *= numDays;
