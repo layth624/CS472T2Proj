@@ -26,9 +26,9 @@
                 </div>
                 <form name="menu">
                     <select name="sel" >
-                    <option title="User">User's Table</option>
-                    <option title="Reservation">Reservation Table</option>
-                    <option title="Rooms">Rooms' Table</option>
+                        <option title="User">User's Table</option>
+                        <option title="Reservation">Reservation Table</option>
+                        <option title="Rooms">Rooms' Table</option>
                     </select>
                 </form>
                 <div class="btn-toolbar mb-2 mb-md-0">
