@@ -76,7 +76,7 @@
                                         </div>
                                     </form>
                                     <%
-                                    query = "SELECT r.ReservationID, r.RoomID, r.CheckInDate, r.CheckOutDate, r.TotalCost, r.Status, rm.RoomType, rm.RoomNumber, rm.Price FROM Reservation r JOIN Room rm ON r.RoomID = rm.RoomID WHERE r.UserID = ?";
+                                    query = "SELECT r.ReservationID, r.RoomID, r.CheckInDate, r.CheckOutDate, r.TotalCost, r.Status, rm.RoomType, rm.RoomNumber, rm.Price FROM Reservation r JOIN Room rm ON r.RoomID = rm.RoomID WHERE r.UserID = ? ORDER BY r.ReservationID DESC";
                                     pstmt = con.prepareStatement(query);
                                     pstmt.setString(1, userID);
                                     ResultSet rsReservations = pstmt.executeQuery();
