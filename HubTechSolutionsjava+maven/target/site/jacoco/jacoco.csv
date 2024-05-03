@@ -1,0 +1,8 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+mavenproject1-1.0-SNAPSHOT,com.mycompany.mavenproject1.resources,JakartaEE10Resource,7,0,0,0,4,0,2,0,2,0
+mavenproject1-1.0-SNAPSHOT,com.example,Calculator,11,0,0,0,3,0,3,0,3,0
+mavenproject1-1.0-SNAPSHOT,com.mycompany.mavenproject1,JakartaRestConfiguration,3,0,0,0,1,0,1,0,1,0
+mavenproject1-1.0-SNAPSHOT,com.mycompany.mavenproject1,emailSender,181,0,14,0,46,0,11,0,4,0
+mavenproject1-1.0-SNAPSHOT,com.mycompany.mavenproject1,Calculator,11,0,0,0,3,0,3,0,3,0
+mavenproject1-1.0-SNAPSHOT,com.mycompany.mavenproject1,DatabaseConnector,8,64,0,2,2,16,0,4,0,3
+mavenproject1-1.0-SNAPSHOT,com.mycompany.mavenproject1,emailSender.new Authenticator() {...},12,0,0,0,2,0,2,0,2,0

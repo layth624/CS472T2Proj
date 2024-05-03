@@ -1,3 +1,7 @@
 com\mycompany\mavenproject1\DatabaseConnector.class
-com\mycompany\mavenproject1\resources\JakartaEE10Resource.class
+com\example\Calculator.class
+com\mycompany\mavenproject1\Calculator.class
 com\mycompany\mavenproject1\JakartaRestConfiguration.class
+com\mycompany\mavenproject1\emailSender.class
+com\mycompany\mavenproject1\emailSender$1.class
+com\mycompany\mavenproject1\resources\JakartaEE10Resource.class

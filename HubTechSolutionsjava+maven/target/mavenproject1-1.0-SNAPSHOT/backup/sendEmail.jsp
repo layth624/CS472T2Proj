@@ -45,10 +45,10 @@
 
                 // Create a new email message
                 Message message = new MimeMessage(mailSession);
-                message.setFrom(new InternetAddress("hubtechsolutions6@gmail.com"));
+                message.setFrom(new InternetAddress("gishaqwork@gmail.com"));
                 message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userEmail));
                 message.setSubject("Payment Confirmation");
-                message.setText("Dear " + username + ",\n\nYour payment has been processed successfully. Payment ID: " + paymentID);
+                message.setText("Dear " + username + ",\n\nYour payment has been processed successfully. Payment ID: " + paymentID + ",\n\n. Thank you for choosing Hubtech Solutions");
 
                 // Send the email
                 Transport.send(message);
@@ -64,6 +64,6 @@
     }
     %>
     <br>
-    <button onclick="window.location.href='profile.jsp'">Return to Profile</button>
+    <a href="profile.jsp" class="btn btn-secondary mt-3">Back to Profile</a>
 </body>
 </html>
