@@ -9,39 +9,67 @@
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <link href="css/styles.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <style>
-        .hallway {
-            width: 100%;
-            height: 20px;
-            background-color: #ccc;
-            margin: 20px 0;
-        }
-    </style>
     <script>
         function updatePrice() {
-            var selectBox = document.getElementById('roomSelect');
-            var selectedRoomID = selectBox.value;
-            var selectedRoomNumber = selectBox.options[selectBox.selectedIndex].text.split(" ")[1];
-            document.getElementById('selectedRoomID').value = selectedRoomID;
-            document.getElementById('selectedRoomNumber').value = selectedRoomNumber;
+            var total = 0;
+            var selectedRooms = document.querySelectorAll('#roomSelect option:checked');
+            var numDays = getNumberOfDays();
 
-            var checkIn = new Date(document.getElementById('checkInDate').value);
-            var checkOut = new Date(document.getElementById('checkOutDate').value);
-            var diffTime = Math.abs(checkOut - checkIn);
-            var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-             if (!isNaN(diffDays)) {
-                var total = diffDays * 100;  
+            selectedRooms.forEach(function(option) {
+                total += 100;  // Assuming each room costs $100 per day
+            });
+
+            total *= numDays;
+
+            if (!isNaN(total) && total > 0) {
                 document.getElementById('totalPrice').textContent = 'Total: $' + total;
-                document.getElementById('totalPriceInput').value = total;  
+                document.getElementById('totalPriceInput').value = total;
             } else {
                 document.getElementById('totalPrice').textContent = '';
-                document.getElementById('totalPriceInput').value = '';  
+                document.getElementById('totalPriceInput').value = '';
             }
         }
 
+        function getNumberOfDays() {
+            var checkIn = new Date(document.getElementById('checkInDate').value);
+            var checkOut = new Date(document.getElementById('checkOutDate').value);
+            var diffTime = Math.abs(checkOut - checkIn);
+            return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        }
+
         function submitForm() {
+            var selectedRooms = document.querySelectorAll('#roomSelect option:checked');
+            var roomIDs = [];
+            selectedRooms.forEach(function(option) {
+                roomIDs.push(option.value);
+            });
+            if (roomIDs.length === 0) {
+                alert('Please select at least one room.');
+                return false;
+            }
+            document.getElementById('selectedRoomID').value = roomIDs.join(",");
             document.getElementById('bookingForm').submit(); // Submit the form
         }
+
+        function setMinDate() {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd;
+            }
+            if (mm < 10) {
+                mm = '0' + mm;
+            }
+            today = yyyy + '-' + mm + '-' + dd;
+            document.getElementById('checkInDate').setAttribute("min", today);
+            document.getElementById('checkOutDate').setAttribute("min", today);
+        }
+
+        window.onload = function() {
+            setMinDate();
+        };
     </script>
 </head>
 <body class="d-flex flex-column">
@@ -58,7 +86,7 @@
                 <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
                     <div class="text-center mb-5">
                         <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-house-door"></i></div>
-                        <h1 class="fw-bolder">Single Room Booking</h1>
+                        <h1 class="fw-bolder">Multiple Room Booking</h1>
                     </div>
                     <div>
                         <% 
@@ -87,20 +115,20 @@
                                 <% }
                             }
                             rs.beforeFirst(); %>
-                            </div>
-                            <label for="roomSelect">Choose a room:</label>
-                            <select id="roomSelect" class="form-control mb-3" onchange="updatePrice()">
-                                <option value="">Select a room</option>
-                                <% while (rs.next()) {
-                                    int roomID = rs.getInt("RoomID");
-                                    int roomNumber = rs.getInt("RoomNumber");
-                                    String status = rs.getString("Status");
-                                    if (status.equals("available")) { %>
-                                        <option value="<%= roomID %>">Room <%= roomNumber %></option>
-                                    <% }
-                                } %>
-                            </select>
-                            <%
+                        </div>
+                        <label for="roomSelect">Choose rooms:</label>
+                        <select id="roomSelect" class="form-control mb-3" multiple size="5" onchange="updatePrice()">
+                            <option value="">Select rooms</option>
+                            <% while (rs.next()) {
+                                int roomID = rs.getInt("RoomID");
+                                int roomNumber = rs.getInt("RoomNumber");
+                                String status = rs.getString("Status");
+                                if (status.equals("available")) { %>
+                                    <option value="<%= roomID %>">Room <%= roomNumber %></option>
+                                <% }
+                            } %>
+                        </select>
+                        <%
                         } catch (Exception e) {
                             out.println("Error: " + e.getMessage());
                             e.printStackTrace();
@@ -113,8 +141,8 @@
                     </div>
                     <form id="bookingForm" method="POST" action="bookRoom.jsp" onsubmit="submitForm()">
                         <input type="hidden" name="roomType" value="single">
-                        <input type="hidden" id="selectedRoomID" name="roomID">
-                        <input type="hidden" id="selectedRoomNumber" name="roomNumber">
+                        <input type="hidden" id="selectedRoomID" name="roomIDs">
+                        <input type="hidden" id="selectedRoomNumber" name="roomNumbers">
                         <input type="hidden" id="totalPriceInput" name="totalCost" value="">
 
                         <div class="mb-3">
@@ -122,7 +150,7 @@
                             <input type="date" class="form-control" id="checkInDate" name="checkInDate" required onchange="updatePrice()">
                         </div>
                         <div class="mb-3">
-                            <label for="checkOutDate" class="form-label">Check-Out Date</label>
+                            <label for="checkOutDate" the "form-label">Check-Out Date</label>
                             <input type="date" class="form-control" id="checkOutDate" name="checkOutDate" required onchange="updatePrice()">
                         </div>
                         <div class="text-center mb-3">
@@ -136,6 +164,5 @@
     </main>
     <%@ include file="includes/footer.jsp" %>
     <script src="js/scripts.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
