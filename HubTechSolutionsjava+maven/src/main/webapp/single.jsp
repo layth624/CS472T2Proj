@@ -117,6 +117,7 @@
                             rs.beforeFirst(); %>
                         </div>
                         <label for="roomSelect">Choose rooms:</label>
+                        <p> Hold CTRL to select multiple rooms at once </p>
                         <select id="roomSelect" class="form-control mb-3" multiple size="5" onchange="updatePrice()">
                             <option value="">Select rooms</option>
                             <% while (rs.next()) {
