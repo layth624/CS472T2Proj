@@ -20,15 +20,16 @@ This repository is for a project for CS 472 (Software Engineering). This project
 	- Build the project using Maven: Right-click on the project in NetBeans and select 'Build'.
 	- Deploy the application to Tomcat by right-clicking on the project and selecting 'Run'.
 
- Website Features Testing
+ Project Features Testing
 - User Credentials:
   - Username: `admin2133`
   - Password: `1234`
 - Admin Credentials:
   - Username: `@realAdmin21324`
   - Password: `1234`
+Alternatively can register for a new account instead of using the provided credentials
 
- Access
+Website Access
 The Website can be accessed at [https://hubtechsolutions.xyz/]
 Note: Admin Access link is at the bottom of the page inside the footer. Admin Regerstraion page is locked use password: 1234 to access the page
 
