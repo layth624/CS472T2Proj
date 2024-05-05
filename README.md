@@ -29,7 +29,7 @@ This repository is for a project for CS 472 (Software Engineering). This project
   - Username: `@realAdmin21324`
   - Password: `1234`
 
-    Alternatively can register for a new account instead of using the provided credentials
+Alternatively can register for a new account instead of using the provided credentials
 
 Website Access
 
