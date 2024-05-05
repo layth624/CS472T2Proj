@@ -15,7 +15,7 @@ This repository is for a project for CS 472 (Software Engineering). This project
 3. Configure Tomcat: Ensure Tomcat server is configured in NetBeans to deploy the web application.
 4. Set Up Database (If using a new Database):
 	- Import the SQL file located in `src/main/java/sql3694994.sql` to set up the database schema.
-	- Update the database connection details in `DatabaseConnector.java` , compile into a class and place the class in the `src/main/webapp/WEB-INF` Folder.
+	- Update the database connection details in `DatabaseConnector.java` , compile into a class and place the class in the `src/main/webapp/WEB-INF/classes` Folder.
 	- Update the database connection details in `Database Details.txt` for reference.
 5. Build and Run:
 	- Build the project using Maven: Right-click on the project in NetBeans and select 'Build'.
