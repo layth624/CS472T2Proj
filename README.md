@@ -7,6 +7,7 @@ Diego Delgado
 Rymma Won
 
  Overview
+ 
 This repository is for a project for CS 472 (Software Engineering). This project is a Java-based web application for managing hotel reservations. It is developed using Maven and is intended to be run in NetBeans IDE with Tomcat as the web server.
 
  Dependencies
